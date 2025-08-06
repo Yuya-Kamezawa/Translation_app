@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>単語リスト</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">単語リスト</h1>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>英語</th>
+                        <th>日本語</th>
+                        <th>発音</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for word in words %}
+                    <tr>
+                        <td>{{ word.english }}</td>
+                        <td>{{ word.japanese }}</td>
+                        <td>{{ word.pronunciation }}</td>
+                        <td>
+                            <a href="{{ url_for('delete_word', id=word.id) }}" class="button is-danger is-small">削除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('index') }}" class="button is-primary">トップへ戻る</a>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- 「base.html」を継承 -->
+{% extends "base.html" %}
+
+<!-- タイトルブロックを書き換える -->
+{% block title %}
+単語分割結果
+{% endblock %}
+
+<!-- ヘッダブロックを書き換える -->
+{% block header %}
+単語分割結果
+{% endblock %}
+
+<!-- コンテンツブロックを書き換える -->
+{% block contents %}
+<!-- 単語分割の結果を表示 -->
+<div class="card p-6">
+    <ul>
+        {% for token in tokenized_list %}
+            <li>
+                {{ token.english }} - {{ token.japanese }} ({{ token.pronunciation }})
+                <form action="{{ url_for('add_word') }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="english" value="{{ token.english }}">
+                    <input type="hidden" name="japanese" value="{{ token.japanese }}">
+                    <input type="hidden" name="pronunciation" value="{{ token.pronunciation }}">
+                    <button type="submit" class="button is-small is-primary">保存</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<a href="{{url_for('index')}}" class="button is-primary">トップへ戻る</a>
+{% endblock %}
